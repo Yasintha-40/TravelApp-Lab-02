@@ -2,30 +2,33 @@ package com.example.travelapp_lab02
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
+import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
-class MainActivity : AppCompatActivity() {
+class Newpassword : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_newpassword)
 
+        // Fixing window insets
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-        // Delay for 2 seconds (2000 milliseconds) before navigating to Onboard1
-        Handler(Looper.getMainLooper()).postDelayed({
-            val intent = Intent(this, onboard1::class.java) // Navigate to Onboard1
+        // Find the "Confirm" button by ID
+        val confirmButton = findViewById<Button>(R.id.buttonConfirm)
+
+        // Set click listener on the button
+        confirmButton.setOnClickListener {
+            // On click, navigate to the Login activity
+            val intent = Intent(this, Login::class.java)
             startActivity(intent)
-            finish() // Finish MainActivity so the user can't go back
-        }, 2000)
+        }
     }
 }
